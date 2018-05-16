@@ -64,18 +64,18 @@ namespace Turbo.Plugins.Stone
                     {
                         case 217142:
                             meteorcircleDeco.Paint(layer, actor, actor.FloorCoordinate, null);
-                            if (me.Stats.ResourceCurArcane == 0)
+                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && me.Stats.ResourceCurArcane == 0)
                             {
                                 starpactstarttict = Hud.Game.CurrentGameTick;
                                 meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
                                 break;
                             }
-                            if (remaining >= 0.1)
+                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining >= 0.1)
                             {
                                 meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
                                 break;
                             }
-                            if (remaining < 0.1 && remaining > 0)
+                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining < 0.1 && remaining > 0)
                             {
                                 if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(134456))
                                 {
