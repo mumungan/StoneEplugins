@@ -1,2 +1,2 @@
 # StoneEplugins
-StonePlugins International English Version
+StonePlugins International Version, English Version
