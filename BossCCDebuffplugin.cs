@@ -10,10 +10,14 @@ namespace Turbo.Plugins.Stone
         public WorldDecoratorCollection BossCCDecorator { get; set; }
         public WorldDecoratorCollection BossDebuffDecorator { get; set; }
         public IFont BossCCDebuffFont { get; set; }
+        public bool showCC { get; set; }
+        public bool showDebuff { get; set; }
 
         public BossCCDebuffplugin()
         {
             Enabled = true;
+            showCC = true;
+            showDebuff = true;
         }
 
         public override void Load(IController hud)
@@ -41,46 +45,26 @@ namespace Turbo.Plugins.Stone
            foreach (var monster in monsters)
                if (monster.Rarity == ActorRarity.Boss)
            {
-            if (monster.Frozen)
-		{
-            BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Frozen");
-                   }
-            if (monster.Chilled)
-		{
-            BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Chilled");
-                   }
-            if (monster.Slow)
-		{
-            BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Slow");
-                   }
-            if (monster.Stunned)
-		{
-            BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Stunned");
-                   }
-            if (monster.Blind)
-		{
-            BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Blind");
-                   }
-            if (monster.Locust)
-		{
-            BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Locust");
-                   }
-            if (monster.Haunted)
-		{
-            BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Haunted");
-                   }
-            if (monster.Palmed)
-		{
-            BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Palmed");
-                   }
-            if (monster.MarkedForDeath)
-		{
-            BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "MarkedForDeath");
-                   }
-            if (monster.Strongarmed)
-		{
-            BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Strongarmed");
-                   }
+               if (monster.Frozen && showCC)
+        		{BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Frozen");}
+               if (monster.Chilled && showCC)
+		        {BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Chilled");}
+               if (monster.Slow && showCC)
+		        {BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Slow");}
+               if (monster.Stunned && showCC)
+		        {BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Stunned");}
+               if (monster.Blind && showCC)
+		        {BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Blind");}
+               if (monster.Locust && showDebuff)
+		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Locust");}
+               if (monster.Haunted && showDebuff)
+		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Haunted");}
+               if (monster.Palmed && showDebuff)
+		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Palmed");}
+               if (monster.MarkedForDeath && showDebuff)
+		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "MarkedForDeath");}
+               if (monster.Strongarmed && showDebuff)
+		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Strongarmed");}
 
             }
         }
