@@ -65,7 +65,6 @@ namespace Turbo.Plugins.Stone
 		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "MarkedForDeath");}
                if (monster.Strongarmed && showDebuff)
 		        {BossDebuffDecorator.Paint(layer, monster, monster.FloorCoordinate, "Strongarmed");}
-
             }
         }
     }
