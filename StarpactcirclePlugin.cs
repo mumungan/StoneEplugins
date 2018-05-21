@@ -7,6 +7,7 @@ namespace Turbo.Plugins.Stone
     {
         public WorldDecoratorCollection meteorcircleDeco { get; set; }
         public WorldDecoratorCollection meteorstringDeco { get; set; }
+        public WorldDecoratorCollection meteorvisionstringDeco { get; set; }
         public WorldDecoratorCollection meteortimerDecorator { get; set; }
         public float remaining { get; set; }
         public float starpactstarttict { get; set; } 
@@ -27,7 +28,6 @@ namespace Turbo.Plugins.Stone
                     Radius = 13,
                 }
                 );
-
             meteorstringDeco = new WorldDecoratorCollection(
                 new GroundLabelDecorator(Hud)
                 {
@@ -35,7 +35,15 @@ namespace Turbo.Plugins.Stone
                     BorderBrush = Hud.Render.CreateBrush(255, 112, 48, 160, -1),
                     TextFont = Hud.Render.CreateFont("tahoma", 11, 255, 0, 140, 255, true, false, 128, 0, 0, 0, true),
                 }
-            );
+                );
+            meteorvisionstringDeco = new WorldDecoratorCollection(
+                new GroundLabelDecorator(Hud)
+                {
+                    BackgroundBrush = Hud.Render.CreateBrush(255, 255, 128, 0, 0),
+                    BorderBrush = Hud.Render.CreateBrush(255, 112, 48, 160, -1),
+                    TextFont = Hud.Render.CreateFont("tahoma", 11, 255, 120, 0, 120, true, false, 128, 0, 0, 0, true),
+                }
+                );
             meteortimerDecorator = new WorldDecoratorCollection(
                 new GroundLabelDecorator(Hud)
                 {
@@ -47,9 +55,9 @@ namespace Turbo.Plugins.Stone
                     CountDownFrom = 1.25f,
                     BackgroundBrushEmpty = Hud.Render.CreateBrush(100, 0, 0, 0, 0),
                     BackgroundBrushFill = Hud.Render.CreateBrush(200, 223, 47, 2, 0),
-                    Radius = 25,
+                   Radius = 25,
                 }
-            );
+                );
         }
 
         public void PaintWorld(WorldLayer layer)
@@ -64,6 +72,11 @@ namespace Turbo.Plugins.Stone
                     {
                         case 217142:
                             meteorcircleDeco.Paint(layer, actor, actor.FloorCoordinate, null);
+                            if (Hud.Game.Me.HeroClassDefinition.HeroClass != HeroClass.Wizard)
+                            {
+                                meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate, null);
+                                break;
+                            }
                             if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && me.Stats.ResourceCurArcane == 0)
                             {
                                 starpactstarttict = Hud.Game.CurrentGameTick;
@@ -79,7 +92,7 @@ namespace Turbo.Plugins.Stone
                             {
                                 if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(134456))
                                 {
-                                    meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
+                                    meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
                                     break;
                                 }
                                 if (me.Powers.BuffIsActive(134456))
@@ -89,7 +102,7 @@ namespace Turbo.Plugins.Stone
                                 }
                                 if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(91549))
                                 {
-                                    meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
+                                    meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
                                     break;
                                 }
                                 if (me.Powers.BuffIsActive(91549))
@@ -98,9 +111,7 @@ namespace Turbo.Plugins.Stone
                                     break;
                                 }
                             }
-                                meteorcircleDeco.Paint(layer, actor, actor.FloorCoordinate, null);
-                                meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate, null);
-                                break;
+                            break;
                     }
             }
         }
