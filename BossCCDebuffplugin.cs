@@ -16,13 +16,13 @@ namespace Turbo.Plugins.Stone
         public BossCCDebuffplugin()
         {
             Enabled = true;
-            showCC = true;
-            showDebuff = true;
         }
 
         public override void Load(IController hud)
         {
             base.Load(hud);
+            showCC = true;
+            showDebuff = true;
             BossCCDecorator = new WorldDecoratorCollection(
                 new GroundLabelDecorator(Hud) 
 		    {
