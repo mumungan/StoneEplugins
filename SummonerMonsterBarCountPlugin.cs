@@ -211,25 +211,26 @@ namespace Turbo.Plugins.Stone
             int summonedcount = 0;
             int summoner1count = 0;
             int summoner2count = 0;
-            int monstersCount = 0;
+            int monstersCountBaseYard = 0;
+            int monstersCountMaxYard = 0;
 
             if (ShowMeScreen)
             {
                 var monsters1 = Hud.Game.AliveMonsters.Where(m => ((m.SummonerAcdDynamicId == 0 && m.IsElite) || !m.IsElite) && m.FloorCoordinate.XYDistanceTo(Hud.Game.Me.FloorCoordinate) <= BaseYard);
                 foreach (var monster in monsters1)
                 {
-                    monstersCount++;
+                    monstersCountBaseYard++;
                 }
-                var text1 = string.Format("{0} Yard : {1}", BaseYard, monstersCount);
+                var text1 = string.Format("{0} Yard : {1}", BaseYard, monstersCountBaseYard);
                 var layer1 = DefaultTextFont.GetTextLayout(text1);
                 DefaultTextFont.DrawText(layer1, Hud.Window.Size.Width * 0.34f, Hud.Window.Size.Height * 0.22f);
 
                 var monsters2 = Hud.Game.AliveMonsters.Where(m => ((m.SummonerAcdDynamicId == 0 && m.IsElite) || !m.IsElite) && m.FloorCoordinate.XYDistanceTo(Hud.Game.Me.FloorCoordinate) <= MaxYard);
                 foreach (var monster in monsters2)
                 {
-                    monstersCount++;
+                    monstersCountMaxYard++;
                 }
-                var text2 = string.Format("{0} Yard : {1}", MaxYard, monstersCount);
+                var text2 = string.Format("{0} Yard : {1}", MaxYard, monstersCountMaxYard);
                 var layer2 = DefaultTextFont.GetTextLayout(text2);
                 DefaultTextFont.DrawText(layer2, Hud.Window.Size.Width * 0.34f, Hud.Window.Size.Height * 0.24f);
             }
