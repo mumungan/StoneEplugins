@@ -30,7 +30,8 @@ namespace Turbo.Plugins.Stone
         public IBrush BossBrush { get; set; }
         public bool JuggernautHighlight { get; set; }
         public bool ShowMonsterType { get; set; }
-        public bool ShowMeScreen { get; set; }
+        public bool ShowMeScreenBaseYard { get; set; }
+        public bool ShowMeScreenMaxYard { get; set; }
         public bool ShowSummonerCount { get; set; }
         public bool ShowSummonerEliteBar { get; set; }
         public bool ShowSummonerNormalMonsterBar { get; set; }
@@ -56,17 +57,18 @@ namespace Turbo.Plugins.Stone
         public override void Load(IController hud)
         {
             base.Load(hud);
-            ShowMeScreen = true;
+            ShowMeScreenBaseYard = true;
+            ShowMeScreenMaxYard = true;
             ShowSummonerCount = true;
             ShowSummonerEliteBar = true;
             ShowSummonerNormalMonsterBar = true;
             JuggernautHighlight = true;
             ShowMonsterType = true;
-            XScaling = 0.8f;
+            XScaling = 0.7f;
             YScaling = 1.2f;
             PercentageDescriptor = "0";
-            XPos = Hud.Window.Size.Width * 0.07f;
-            YPos = Hud.Window.Size.Height * 0.40f;
+            XPos = Hud.Window.Size.Width * 0.73f;
+            YPos = Hud.Window.Size.Height * 0.05f;
             BaseYard = 40;
             MaxYard = 120;
             DisplayAffix = new Dictionary<MonsterAffix, string>();
@@ -203,7 +205,7 @@ namespace Turbo.Plugins.Stone
             py = Hud.Window.Size.Height * 0.001667f * YScaling;
             h = py * 6;
             w2 = px * 60;
-            float yref = 5.5f;
+            float yref = 0.01f;
             int summonerelite1count = 0;
             int summonerelite2count = 0;
             int summonedelite1count = 0;
@@ -214,7 +216,7 @@ namespace Turbo.Plugins.Stone
             int monstersCountBaseYard = 0;
             int monstersCountMaxYard = 0;
 
-            if (ShowMeScreen)
+            if (ShowMeScreenBaseYard)
             {
                 var monsters1 = Hud.Game.AliveMonsters.Where(m => ((m.SummonerAcdDynamicId == 0 && m.IsElite) || !m.IsElite) && m.FloorCoordinate.XYDistanceTo(Hud.Game.Me.FloorCoordinate) <= BaseYard);
                 foreach (var monster in monsters1)
@@ -224,6 +226,9 @@ namespace Turbo.Plugins.Stone
                 var text1 = string.Format("{0} Yard : {1}", BaseYard, monstersCountBaseYard);
                 var layer1 = DefaultTextFont.GetTextLayout(text1);
                 DefaultTextFont.DrawText(layer1, Hud.Window.Size.Width * 0.34f, Hud.Window.Size.Height * 0.22f);
+            }
+            if (ShowMeScreenMaxYard)
+            {
 
                 var monsters2 = Hud.Game.AliveMonsters.Where(m => ((m.SummonerAcdDynamicId == 0 && m.IsElite) || !m.IsElite) && m.FloorCoordinate.XYDistanceTo(Hud.Game.Me.FloorCoordinate) <= MaxYard);
                 foreach (var monster in monsters2)
@@ -297,32 +302,32 @@ namespace Turbo.Plugins.Stone
                 textBuilder.Clear();
                 if (summonerelite1count > 0)
                 {
-                    textBuilder.AppendFormat("EZombieSummoner: {0}", summonerelite1count);
+                    textBuilder.AppendFormat("EZombieSn: {0}", summonerelite1count);
                     textBuilder.AppendLine();
                 }
                 if (summonedelite1count > 0)
                 {
-                    textBuilder.AppendFormat("illuZombieSummoner: {0}", summonedelite1count);
+                    textBuilder.AppendFormat("illuZombieSn: {0}", summonedelite1count);
                     textBuilder.AppendLine();
                 }
                 if (summonerelite2count > 0)
                 {
-                    textBuilder.AppendFormat("ESkelSummoner: {0}", summonerelite2count);
+                    textBuilder.AppendFormat("ESkelSn: {0}", summonerelite2count);
                     textBuilder.AppendLine();
                 }
                 if (summonedelite2count > 0)
                 {
-                    textBuilder.AppendFormat("illuSkelSummoner: {0}", summonedelite2count);
+                    textBuilder.AppendFormat("illuSkelSn: {0}", summonedelite2count);
                     textBuilder.AppendLine();
                 }
                 if (summoner1count > 0)
                 {
-                    textBuilder.AppendFormat("ZombieSummoner: {0}", summoner1count);
+                    textBuilder.AppendFormat("ZombieSn: {0}", summoner1count);
                     textBuilder.AppendLine();
                 }
                 if (summoner2count > 0)
                 {
-                    textBuilder.AppendFormat("SkelSummoner: {0}", summoner2count);
+                    textBuilder.AppendFormat("SkelSn: {0}", summoner2count);
                     textBuilder.AppendLine();
                 }
                 if (summonedcount > 0)
@@ -332,7 +337,7 @@ namespace Turbo.Plugins.Stone
                     textBuilder.AppendLine();
                 }
             var layout = DefaultTextFont.GetTextLayout(textBuilder.ToString());
-            DefaultTextFont.DrawText(layout, Hud.Window.Size.Width * 0.72f, Hud.Window.Size.Height * 0.61f);
+            DefaultTextFont.DrawText(layout, Hud.Window.Size.Width * 0.76f, Hud.Window.Size.Height * 0.61f);
             }
         }
 
