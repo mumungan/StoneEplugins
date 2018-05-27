@@ -30,7 +30,7 @@ namespace Turbo.Plugins.Stone
             };
 
             _ruleCalculator = new BuffRuleCalculator(Hud);
-            _ruleCalculator.SizeMultiplier = 1f;
+            _ruleCalculator.SizeMultiplier = 0.75f;
 
             _ruleCalculator.Rules.Add(new BuffRule(430674) { IconIndex = 1, MinimumIconCount = 0, DisableName = true }); // Arcane
             _ruleCalculator.Rules.Add(new BuffRule(430674) { IconIndex = 2, MinimumIconCount = 0, DisableName = true }); // Cold
@@ -116,8 +116,8 @@ namespace Turbo.Plugins.Stone
 
                 var portraitRect = player.PortraitUiElement.Rectangle;
 
-                var x = portraitRect.Right * 8f;
-                var y = portraitRect.Top + portraitRect.Height * 1.8f;
+                var x = portraitRect.Right * 8.2f;
+                var y = portraitRect.Top + portraitRect.Height * 2.0f;
 
                 BuffPainter.PaintHorizontal(_ruleCalculator.PaintInfoList, x, y, _ruleCalculator.StandardIconSize, 0);
             }
