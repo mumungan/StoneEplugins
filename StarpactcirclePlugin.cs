@@ -10,7 +10,8 @@ namespace Turbo.Plugins.Stone
         public WorldDecoratorCollection meteorvisionstringDeco { get; set; }
         public WorldDecoratorCollection meteortimerDecorator { get; set; }
         public float remaining { get; set; }
-        public float starpactstarttict { get; set; } 
+        public float starpactstarttict { get; set; }
+        private bool starpacttimerRunning = false;
 
         public StarpactcirclePlugin()
         {
@@ -35,9 +36,9 @@ namespace Turbo.Plugins.Stone
                     BorderBrush = Hud.Render.CreateBrush(255, 112, 48, 160, -1),
                     TextFont = Hud.Render.CreateFont("tahoma", 11, 255, 0, 140, 255, true, false, 128, 0, 0, 0, true),
                 }
-                );
+            );
             meteorvisionstringDeco = new WorldDecoratorCollection(
-                new GroundLabelDecorator(Hud)
+            new GroundLabelDecorator(Hud)
                 {
                     BackgroundBrush = Hud.Render.CreateBrush(255, 255, 128, 0, 0),
                     BorderBrush = Hud.Render.CreateBrush(255, 112, 48, 160, -1),
@@ -55,9 +56,9 @@ namespace Turbo.Plugins.Stone
                     CountDownFrom = 1.25f,
                     BackgroundBrushEmpty = Hud.Render.CreateBrush(100, 0, 0, 0, 0),
                     BackgroundBrushFill = Hud.Render.CreateBrush(200, 223, 47, 2, 0),
-                   Radius = 25,
+                    Radius = 25,
                 }
-                );
+            );
         }
 
         public void PaintWorld(WorldLayer layer)
@@ -77,38 +78,49 @@ namespace Turbo.Plugins.Stone
                                 meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate, null);
                                 break;
                             }
-                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && me.Stats.ResourceCurArcane == 0)
+                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard)
                             {
-                                starpactstarttict = Hud.Game.CurrentGameTick;
-                                meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
-                                break;
-                            }
-                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining >= 0.1)
-                            {
-                                meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
-                                break;
-                            }
-                            if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining < 0.1 && remaining > 0)
-                            {
-                                if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(134456))
+                                if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && me.Stats.ResourceCurArcane == 0)
                                 {
-                                    meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
+                                    if (!starpacttimerRunning)
+                                    {
+                                        starpactstarttict = Hud.Game.CurrentGameTick;
+                                        starpacttimerRunning = true;
+                                    }
+                                    meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
                                     break;
                                 }
-                                if (me.Powers.BuffIsActive(134456))
+                                if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining >= 0.1)
                                 {
-                                    meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
+                                    meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
                                     break;
                                 }
-                                if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(91549))
+                                if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining < 0.1 && remaining > 0)
                                 {
-                                    meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
-                                    break;
-                                }
-                                if (me.Powers.BuffIsActive(91549))
-                                {
-                                    meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
-                                    break;
+                                    if (starpacttimerRunning)
+                                    {
+                                        starpacttimerRunning = false;
+                                    }
+                                    if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(134456))
+                                    {
+                                        meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
+                                        break;
+                                    }
+                                    if (me.Powers.BuffIsActive(134456))
+                                    {
+                                        meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
+                                        break;
+                                    }
+                                    if (me.Powers.BuffIsActive(430674, 1) && me.Powers.BuffIsActive(91549))
+                                    {
+                                        meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
+                                        break;
+                                    }
+                                    if (me.Powers.BuffIsActive(91549))
+                                    {
+                                        meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
+                                        break;
+                                    }
                                 }
                             }
                             break;
@@ -117,5 +129,4 @@ namespace Turbo.Plugins.Stone
         }
     }
 }
-
 

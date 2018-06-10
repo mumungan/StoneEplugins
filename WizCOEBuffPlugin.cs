@@ -67,7 +67,7 @@ namespace Turbo.Plugins.Stone
             if (Hud.Game.Me.HeroClassDefinition.HeroClass != HeroClass.Wizard) return;
             foreach (var player in Hud.Game.Players)
             {
-                if (player.ActorId == 0) continue;
+                if (!player.HasValidActor) continue;
 
                 var buff = player.Powers.GetBuff(430674);
                 if ((buff == null) || (buff.IconCounts[0] <= 0)) continue;
