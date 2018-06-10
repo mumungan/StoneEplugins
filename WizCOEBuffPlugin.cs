@@ -67,59 +67,63 @@ namespace Turbo.Plugins.Stone
             if (Hud.Game.Me.HeroClassDefinition.HeroClass != HeroClass.Wizard) return;
             foreach (var player in Hud.Game.Players)
             {
-                if (!player.HasValidActor) continue;
-
-                var buff = player.Powers.GetBuff(430674);
-                if ((buff == null) || (buff.IconCounts[0] <= 0)) continue;
-
-                var classSpecificRules = GetCurrentRules(player.HeroClassDefinition.HeroClass);
-
-                _ruleCalculator.CalculatePaintInfo(player, classSpecificRules);
-
-                if (_ruleCalculator.PaintInfoList.Count == 0) return;
-                if (!_ruleCalculator.PaintInfoList.Any(info => info.TimeLeft > 0)) return;
-
-                var highestElementalBonus = player.Offense.HighestElementalDamageBonus;
-
-                for (int i = 0; i < _ruleCalculator.PaintInfoList.Count; i++)
+                if (player.IsMe)
                 {
-                    var info = _ruleCalculator.PaintInfoList[0];
-                    if (info.TimeLeft <= 0)
+                    if (!player.HasValidActor) continue;
+
+
+                    var buff = player.Powers.GetBuff(430674);
+                    if ((buff == null) || (buff.IconCounts[0] <= 0)) continue;
+
+                    var classSpecificRules = GetCurrentRules(player.HeroClassDefinition.HeroClass);
+
+                    _ruleCalculator.CalculatePaintInfo(player, classSpecificRules);
+
+                    if (_ruleCalculator.PaintInfoList.Count == 0) return;
+                    if (!_ruleCalculator.PaintInfoList.Any(info => info.TimeLeft > 0)) return;
+
+                    var highestElementalBonus = player.Offense.HighestElementalDamageBonus;
+
+                    for (int i = 0; i < _ruleCalculator.PaintInfoList.Count; i++)
                     {
-                        _ruleCalculator.PaintInfoList.RemoveAt(0);
-                        _ruleCalculator.PaintInfoList.Add(info);
+                        var info = _ruleCalculator.PaintInfoList[0];
+                        if (info.TimeLeft <= 0)
+                        {
+                            _ruleCalculator.PaintInfoList.RemoveAt(0);
+                            _ruleCalculator.PaintInfoList.Add(info);
+                        }
+                        else break;
                     }
-                    else break;
+
+                    for (int orderIndex = 0; orderIndex < _ruleCalculator.PaintInfoList.Count; orderIndex++)
+                    {
+                        var info = _ruleCalculator.PaintInfoList[orderIndex];
+                        var best = false;
+                        switch (info.Rule.IconIndex)
+                        {
+                            case 1: best = player.Offense.BonusToArcane == highestElementalBonus; break;
+                            case 2: best = player.Offense.BonusToCold == highestElementalBonus; break;
+                            case 3: best = player.Offense.BonusToFire == highestElementalBonus; break;
+                            case 4: best = player.Offense.BonusToHoly == highestElementalBonus; break;
+                            case 5: best = player.Offense.BonusToLightning == highestElementalBonus; break;
+                            case 6: best = player.Offense.BonusToPhysical == highestElementalBonus; break;
+                            case 7: best = player.Offense.BonusToPoison == highestElementalBonus; break;
+                        }
+                        if (best) info.Size *= 1.35f;
+                        if (best && orderIndex > 0)
+                        {
+                            info.TimeLeft = (orderIndex - 1) * 4 - 1 + _ruleCalculator.PaintInfoList[0].TimeLeft;
+                        }
+                        else info.TimeLeftNumbersOverride = false;
+                    }
+
+                    var portraitRect = player.PortraitUiElement.Rectangle;
+
+                    var x = portraitRect.Right * 8.2f;
+                    var y = portraitRect.Top + portraitRect.Height * 2.0f;
+
+                    BuffPainter.PaintHorizontal(_ruleCalculator.PaintInfoList, x, y, _ruleCalculator.StandardIconSize, 0);
                 }
-
-                for (int orderIndex = 0; orderIndex < _ruleCalculator.PaintInfoList.Count; orderIndex++)
-                {
-                    var info = _ruleCalculator.PaintInfoList[orderIndex];
-                    var best = false;
-                    switch (info.Rule.IconIndex)
-                    {
-                        case 1: best = player.Offense.BonusToArcane == highestElementalBonus; break;
-                        case 2: best = player.Offense.BonusToCold == highestElementalBonus; break;
-                        case 3: best = player.Offense.BonusToFire == highestElementalBonus; break;
-                        case 4: best = player.Offense.BonusToHoly == highestElementalBonus; break;
-                        case 5: best = player.Offense.BonusToLightning == highestElementalBonus; break;
-                        case 6: best = player.Offense.BonusToPhysical == highestElementalBonus; break;
-                        case 7: best = player.Offense.BonusToPoison == highestElementalBonus; break;
-                    }
-                    if (best) info.Size *= 1.35f;
-                    if (best && orderIndex > 0)
-                    {
-                        info.TimeLeft = (orderIndex - 1) * 4 -1 + _ruleCalculator.PaintInfoList[0].TimeLeft;
-                    }
-                    else info.TimeLeftNumbersOverride = false;
-                }
-
-                var portraitRect = player.PortraitUiElement.Rectangle;
-
-                var x = portraitRect.Right * 8.2f;
-                var y = portraitRect.Top + portraitRect.Height * 2.0f;
-
-                BuffPainter.PaintHorizontal(_ruleCalculator.PaintInfoList, x, y, _ruleCalculator.StandardIconSize, 0);
             }
         }
 
