@@ -57,11 +57,11 @@ namespace Turbo.Plugins.Stone
         public override void Load(IController hud)
         {
             base.Load(hud);
-            ShowMeScreenBaseYard = true;
-            ShowMeScreenMaxYard = true;
-            ShowSummonerCount = true;
-            ShowSummonerEliteBar = true;
-            ShowSummonerNormalMonsterBar = true;
+            ShowMeScreenBaseYard = true;    // 1. MeScreenBaseYard on, off
+            ShowMeScreenMaxYard = true;     // 2. MeScreenMaxYard on, off
+            ShowSummonerCount = true;       // 3. SummonerCount on, off
+            ShowSummonerEliteBar = true;    // 4. SummonerEliteBar on, off
+            ShowSummonerNormalMonsterBar = true; //5.SummonerNormalMonsterBar on, off
 
             JuggernautHighlight = true;
             ShowMonsterType = true;
