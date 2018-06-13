@@ -62,6 +62,7 @@ namespace Turbo.Plugins.Stone
             ShowSummonerCount = true;
             ShowSummonerEliteBar = true;
             ShowSummonerNormalMonsterBar = true;
+
             JuggernautHighlight = true;
             ShowMonsterType = true;
             XScaling = 0.7f;
@@ -302,32 +303,32 @@ namespace Turbo.Plugins.Stone
                 textBuilder.Clear();
                 if (summonerelite1count > 0)
                 {
-                    textBuilder.AppendFormat("ESummoner1: {0}", summonerelite1count);
+                    textBuilder.AppendFormat("EZombieS: {0}", summonerelite1count);
                     textBuilder.AppendLine();
                 }
                 if (summonedelite1count > 0)
                 {
-                    textBuilder.AppendFormat("illuSummoner1: {0}", summonedelite1count);
+                    textBuilder.AppendFormat("illuZombieS: {0}", summonedelite1count);
                     textBuilder.AppendLine();
                 }
                 if (summonerelite2count > 0)
                 {
-                    textBuilder.AppendFormat("ESummoner2: {0}", summonerelite2count);
+                    textBuilder.AppendFormat("ESkeletonS: {0}", summonerelite2count);
                     textBuilder.AppendLine();
                 }
                 if (summonedelite2count > 0)
                 {
-                    textBuilder.AppendFormat("illuSummoner2: {0}", summonedelite2count);
+                    textBuilder.AppendFormat("illuSkeletonS: {0}", summonedelite2count);
                     textBuilder.AppendLine();
                 }
                 if (summoner1count > 0)
                 {
-                    textBuilder.AppendFormat("Summoner1: {0}", summoner1count);
+                    textBuilder.AppendFormat("ZombieS: {0}", summoner1count);
                     textBuilder.AppendLine();
                 }
                 if (summoner2count > 0)
                 {
-                    textBuilder.AppendFormat("Summoner2: {0}", summoner2count);
+                    textBuilder.AppendFormat("SkeletonS: {0}", summoner2count);
                     textBuilder.AppendLine();
                 }
                 if (summonedcount > 0)
