@@ -60,8 +60,8 @@ namespace Turbo.Plugins.Stone
             ShowMeScreenBaseYard = true;    // 1. MeScreenBaseYard on, off
             ShowMeScreenMaxYard = true;     // 2. MeScreenMaxYard on, off
             ShowSummonerCount = true;       // 3. SummonerCount on, off
-            ShowSummonerEliteBar = true;    // 4. SummonerEliteBar on, off
-            ShowSummonerNormalMonsterBar = true; //5.SummonerNormalMonsterBar on, off
+            ShowSummonerEliteBar = true;    // 4. EliteSummonerBar on, off
+            ShowSummonerNormalMonsterBar = true; //5.NormalSummonerBar on, off
 
             JuggernautHighlight = true;
             ShowMonsterType = true;
