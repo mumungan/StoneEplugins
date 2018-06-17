@@ -17,6 +17,8 @@ namespace Turbo.Plugins.Stone
     public class SummonerMonsterBarCountPlugin : BasePlugin, IInGameWorldPainter
     {
         public WorldDecoratorCollection Decorator { get; set; }
+        public WorldDecoratorCollection Decoratorred { get; set; }
+        public WorldDecoratorCollection Decoratorgray { get; set; }
         public IFont DefaultTextFont { get; set; }
         public IFont LightFont { get; set; }
         public IFont RedFont { get; set; }
@@ -35,6 +37,7 @@ namespace Turbo.Plugins.Stone
         public bool ShowSummonerCount { get; set; }
         public bool ShowSummonerEliteBar { get; set; }
         public bool ShowSummonerNormalMonsterBar { get; set; }
+        public bool showdifLabel { get; set; }
         public float XPos { get; set; }
         public float YPos { get; set; }
         public float XScaling { get; set; }
@@ -62,6 +65,7 @@ namespace Turbo.Plugins.Stone
             ShowSummonerCount = true;       // 3. SummonerCount on, off
             ShowSummonerEliteBar = true;    // 4. EliteSummonerBar on, off
             ShowSummonerNormalMonsterBar = true; //5.NormalSummonerBar on, off
+            showdifLabel = true;            // 6. different Label Color on, off
 
             JuggernautHighlight = true;
             ShowMonsterType = true;
@@ -88,10 +92,10 @@ namespace Turbo.Plugins.Stone
             Decorator = new WorldDecoratorCollection(
                 new MapShapeDecorator(Hud)
                 {
-                Brush = Hud.Render.CreateBrush(180, 255, 50, 50, 0),
-                ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
-                ShapePainter = new CircleShapePainter(Hud),
-                Radius = 2,
+                    Brush = Hud.Render.CreateBrush(180, 255, 50, 50, 0),
+                    ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
+                    ShapePainter = new CircleShapePainter(Hud),
+                    Radius = 2,
                 },
                 new GroundLabelDecorator(Hud)
                 {
@@ -99,6 +103,34 @@ namespace Turbo.Plugins.Stone
                     TextFont = Hud.Render.CreateFont("tahoma", 6.5f, 255, 255, 255, 255, false, false, false),
                 }
                 );
+            Decoratorred = new WorldDecoratorCollection(
+            new MapShapeDecorator(Hud)
+            {
+                Brush = Hud.Render.CreateBrush(180, 255, 50, 50, 0),
+                ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
+                ShapePainter = new CircleShapePainter(Hud),
+                Radius = 2,
+            },
+            new GroundLabelDecorator(Hud)
+            {
+                BackgroundBrush = Hud.Render.CreateBrush(255, 200, 50, 50, 0),
+                TextFont = Hud.Render.CreateFont("tahoma", 6.5f, 255, 255, 255, 255, false, false, false),
+            }
+            );
+            Decoratorgray = new WorldDecoratorCollection(
+            new MapShapeDecorator(Hud)
+            {
+                Brush = Hud.Render.CreateBrush(128, 255, 255, 255, 0),
+                ShadowBrush = Hud.Render.CreateBrush(96, 0, 0, 0, 1),
+                ShapePainter = new CircleShapePainter(Hud),
+                Radius = 2,
+            },
+            new GroundLabelDecorator(Hud)
+            {
+                BackgroundBrush = Hud.Render.CreateBrush(128, 255, 255, 255, 0),
+                TextFont = Hud.Render.CreateFont("tahoma", 6.5f, 255, 255, 255, 255, false, false, false),
+            }
+            );
 
 
             //Colorization
@@ -241,6 +273,26 @@ namespace Turbo.Plugins.Stone
                 DefaultTextFont.DrawText(layer2, Hud.Window.Size.Width * 0.34f, Hud.Window.Size.Height * 0.24f);
             }
 
+            if (showdifLabel)
+            {
+                var monsters3 = Hud.Game.AliveMonsters.Where(m => (m.SummonerAcdDynamicId == 0 && m.IsElite) || !m.IsElite);
+                foreach (var monster in monsters3)
+                {
+                    var summonerMonsters = SummonerMonsternames1.ContainsKey(monster.SnoMonster.NameEnglish) || SummonerMonsternames1.ContainsKey(monster.SnoMonster.NameLocalized) || SummonerMonsternames2.ContainsKey(monster.SnoMonster.NameEnglish) || SummonerMonsternames2.ContainsKey(monster.SnoMonster.NameLocalized);
+                    if (summonerMonsters)
+                    {
+                        if (monster.FloorCoordinate.XYDistanceTo(Hud.Game.Me.FloorCoordinate) < BaseYard)
+                        {
+                            Decoratorred.Paint(layer, monster, monster.FloorCoordinate, monster.SnoMonster.NameLocalized);
+                        }
+                        else
+                        {
+                            Decoratorgray.Paint(layer, monster, monster.FloorCoordinate, monster.SnoMonster.NameLocalized);
+                        }
+                    }
+                }
+            }
+
             var monsters = Hud.Game.AliveMonsters;
             foreach (var monster in monsters)
             {
@@ -255,7 +307,10 @@ namespace Turbo.Plugins.Stone
                             DrawHealthBar(layer, monster, ref yref);
                             yref += 0.5f;
                         }
-                        Decorator.Paint(layer, monster, monster.FloorCoordinate, "E" + monster.SnoMonster.NameLocalized);
+                        if (!showdifLabel)
+                        {
+                            Decorator.Paint(layer, monster, monster.FloorCoordinate, "E" + monster.SnoMonster.NameLocalized);
+                        }
                     }
                     if (SummonerMonsternames2.ContainsKey(monster.SnoMonster.NameEnglish) || SummonerMonsternames2.ContainsKey(monster.SnoMonster.NameLocalized))
                     {
@@ -266,7 +321,10 @@ namespace Turbo.Plugins.Stone
                             DrawHealthBar(layer, monster, ref yref);
                             yref += 0.5f;
                         }
-                        Decorator.Paint(layer, monster, monster.FloorCoordinate, "E" + monster.SnoMonster.NameLocalized);
+                        if (!showdifLabel)
+                        {
+                            Decorator.Paint(layer, monster, monster.FloorCoordinate, "E" + monster.SnoMonster.NameLocalized);
+                        }
                     }
                 }
             }
@@ -283,7 +341,10 @@ namespace Turbo.Plugins.Stone
                             DrawHealthBar(layer, monster, ref yref);
                             yref += 0.5f;
                         }
-                        Decorator.Paint(layer, monster, monster.FloorCoordinate, monster.SnoMonster.NameLocalized);
+                        if (!showdifLabel)
+                        {
+                            Decorator.Paint(layer, monster, monster.FloorCoordinate, monster.SnoMonster.NameLocalized);
+                        }
                     }
                     if (SummonerMonsternames2.ContainsKey(monster.SnoMonster.NameEnglish) || SummonerMonsternames2.ContainsKey(monster.SnoMonster.NameLocalized))
                     {
@@ -293,11 +354,15 @@ namespace Turbo.Plugins.Stone
                             DrawHealthBar(layer, monster, ref yref);
                             yref += 0.5f;
                         }
-                        Decorator.Paint(layer, monster, monster.FloorCoordinate, monster.SnoMonster.NameLocalized);
+                        if (!showdifLabel)
+                        {
+                            Decorator.Paint(layer, monster, monster.FloorCoordinate, monster.SnoMonster.NameLocalized);
+                        }
                     }
                 }
-
             }
+
+
             if (ShowSummonerCount)
             {
                 textBuilder.Clear();
@@ -337,12 +402,12 @@ namespace Turbo.Plugins.Stone
                     textBuilder.AppendFormat("Summoned: {0}", summonedcount);
                     textBuilder.AppendLine();
                 }
-            var layout = DefaultTextFont.GetTextLayout(textBuilder.ToString());
-            DefaultTextFont.DrawText(layout, Hud.Window.Size.Width * 0.76f, Hud.Window.Size.Height * 0.61f);
+                var layout = DefaultTextFont.GetTextLayout(textBuilder.ToString());
+                DefaultTextFont.DrawText(layout, Hud.Window.Size.Width * 0.76f, Hud.Window.Size.Height * 0.61f);
             }
         }
 
-  }
+    }
 }
 
     
