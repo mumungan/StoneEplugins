@@ -51,7 +51,7 @@ namespace Turbo.Plugins.Stone
             {
                 if (reflectdamagemonsters.Contains(monster.SnoMonster.Sno))
                 {
-                    reflectdamagemonsterDecorator.Paint(layer, monster, monster.FloorCoordinate, "★");
+                    reflectdamagemonsterDecorator.Paint(layer, monster, monster.FloorCoordinate.Offset(0, 0, -2), "★");
                 }
             }
         }
