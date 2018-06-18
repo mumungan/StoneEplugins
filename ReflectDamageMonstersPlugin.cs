@@ -29,6 +29,7 @@ namespace Turbo.Plugins.Stone
                 116075,
                 26066, //Dune Dervish
                 26067, //Vicious Magewraith
+                450352, //Vicious Magewraith
             };
 
             reflectdamagemonsterDecorator = new WorldDecoratorCollection(
