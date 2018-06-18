@@ -26,6 +26,7 @@ namespace Turbo.Plugins.Stone
                 116305, //Sand Dweller
                 282027,
                 329330,
+                116075,
                 26066, //Dune Dervish
                 26067, //Vicious Magewraith
             };
