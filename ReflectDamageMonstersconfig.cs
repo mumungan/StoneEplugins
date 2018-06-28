@@ -17,11 +17,68 @@ namespace Turbo.Plugins.Stone
         public void Customize()
         {
             Hud.RunOnPlugin<ReflectDamageMonstersPlugin>(plugin =>
-            {
-                plugin.RFoffset = -2.0f; // Customize °⁄GroundLabel offset 
-                plugin.RFminimapoffsetx = -10.0f; // Customize °⁄Label minimap offset
-                plugin.RFminimapoffsety = -10.0f; // Customize °⁄Label minimap offset
-                plugin.RFminimapoffsetz = -10.0f; // Customize °⁄Label minimap offset
+            {                
+			plugin.ShowGroundLabel = true; //GroundLabel on, off
+			plugin.ShowMiniMapLabel = true; //MiniMapLabel on, off
+			// Offset
+            plugin.RFoffset = -2.0f; // Customize ‚òÖGroundLabel offset 
+            plugin.RadiusOffset = 15.0f; // Customize ‚òÖLabel minimap offset
+			// Label
+            plugin.RFLabel = "‚òÖ"; // Customize ReflectDamageMonsters' Label + monsterG1 Label
+			plugin.monsterG2Label = "üí•"; // Customize Label
+			plugin.monsterG3Label = "üîÜ";
+			plugin.monsterG4Label = "‚ò†Ô∏è";
+			plugin.affixLabel_1 = "üëπ";
+			plugin.affixLabel_2 = "üõë";
+			plugin.affixLabel_3 = "üè¥‚Äç";
+			// Label Colour
+			plugin.RFLabelColour = "yellow"; // Customize Label colour  //red, green, blue, blueviolet, yellow, orange, black, fuchsia, gold, deeppink. Choose from these colors.
+			plugin.monsterG2LabelColour = "red";  
+			plugin.monsterG3LabelColour = "green";
+			plugin.monsterG4LabelColour = "blueviolet";
+			plugin.affixLabel_1Colour = "yellow"; // // Customize the Label colour of EliteAffix //red, green, blue, blueviolet, yellow, orange, black, fuchsia, gold, deeppink. Choose from these colors.
+			plugin.affixLabel_2Colour = "yellow";
+			plugin.affixLabel_3Colour = "yellow";
+			// Label Size
+			plugin.groundLabelsizeG1 = 12.0f; // Customize groundLabelsize
+			plugin.groundLabelsizeG2 = 12.0f;
+			plugin.groundLabelsizeG3 = 12.0f;
+			plugin.groundLabelsizeG4 = 12.0f;
+			plugin.groundLabelsizeaffix1 = 12.0f; // Customize the groundLabelsize of EliteAffix
+			plugin.groundLabelsizeaffix2 = 12.0f;;
+			plugin.groundLabelsizeaffix3 = 12.0f;;
+			plugin.mapLabelsizeG1 = 8.0f; // Customize MapLabelsize 
+			plugin.mapLabelsizeG2 = 8.0f;
+			plugin.mapLabelsizeG3 = 8.0f;
+			plugin.mapLabelsizeG4 = 8.0f;
+			plugin.mapLabelsizeaffix1 = 8.0f; // Customize the MapLabelsize of EliteAffix
+			plugin.mapLabelsizeaffix2 = 8.0f;
+			plugin.mapLabelsizeaffix3 = 8.0f;
+			
+			// Monster Group 1 that wants to label. monsterG1Label uses ReflectDamageMonsters'  label
+            plugin.monsterG1_1 = ""; // Insert the Name of the monster. you can use English or your default game language
+            plugin.monsterG1_2 = "";  // monsterGroup 1 Label colour
+            plugin.monsterG1_3 = "";      
+            plugin.monsterG1_4 = "";
+            // Monster Group 2 that wants to label. 
+            plugin.monsterG2_1 = "Retching Cadaver";  // monsterGroup 2 Label colour
+            plugin.monsterG2_2 = "Deathspitter";
+            plugin.monsterG2_3 = "Spewing Horror";
+            plugin.monsterG2_4 = "Dust Retcher";
+			// Monster Group 3 that wants to label. 
+            plugin.monsterG3_1 = "Tomb Guardian";  // monsterGroup 3 Label colour
+            plugin.monsterG3_2 = "Vengeful Summoner";
+            plugin.monsterG3_3 = "Returned Summoner";
+            plugin.monsterG3_4 = "Tortured Summoner";
+			// Monster Group 4 that wants to label. 
+            plugin.monsterG4_1 = "";  // monsterGroup 4 Label colour
+            plugin.monsterG4_2 = "";
+            plugin.monsterG4_3 = "";
+            plugin.monsterG4_4 = "";
+			// Elite Affix Label
+			plugin.affixname_1 = "Wormhole"; // Insert the the Affix of Elite. you can use English or your default game language. ex) Wormhole, Juggernaut, Illusionist
+			plugin.affixname_2 = "Juggernaut";
+			plugin.affixname_3 = "Illusionist";
 			});
          }
 	}
