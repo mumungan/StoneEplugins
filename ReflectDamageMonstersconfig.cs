@@ -32,13 +32,13 @@ namespace Turbo.Plugins.Stone
 			plugin.affixLabel_2 = "🛑";
 			plugin.affixLabel_3 = "🏴‍";
 			// Label Colour
-			plugin.RFLabelColour = "yellow"; // Customize Label colour  //red, green, blue, blueviolet, yellow, orange, black, fuchsia, gold, deeppink. Choose from these colors.
-			plugin.monsterG2LabelColour = "red";  
-			plugin.monsterG3LabelColour = "green";
+			plugin.RFLabelColour = "yellow"; // Customize Label colour  //white, yellow, red, green, blue, blueviolet, orange, black, fuchsia, gold, deeppink. Choose from these colors.
+			plugin.monsterG2LabelColour = "yellow";  
+			plugin.monsterG3LabelColour = "yellow";
 			plugin.monsterG4LabelColour = "blueviolet";
-			plugin.affixLabel_1Colour = "yellow"; // // Customize the Label colour of EliteAffix //red, green, blue, blueviolet, yellow, orange, black, fuchsia, gold, deeppink. Choose from these colors.
-			plugin.affixLabel_2Colour = "yellow";
-			plugin.affixLabel_3Colour = "yellow";
+			plugin.affixLabel_1Colour = "white"; // // Customize the Label colour of EliteAffix //white, yellow, red, green, blue, blueviolet, orange, black, fuchsia, gold, deeppink. Choose from these colors.
+			plugin.affixLabel_2Colour = "white";
+			plugin.affixLabel_3Colour = "white";
 			// Label Size
 			plugin.groundLabelsizeG1 = 12.0f; // Customize groundLabelsize
 			plugin.groundLabelsizeG2 = 12.0f;

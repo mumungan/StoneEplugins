@@ -49,13 +49,13 @@ namespace Turbo.Plugins.Stone
 			affixLabel_2 = "🛑";
 			affixLabel_3 = "🏴‍";
 			// Label Colour
-			RFLabelColour = "yellow"; // Customize Label colour  //red, green, blue, blueviolet, yellow, orange, black, fuchsia, gold, deeppink. Choose from these colors.
-			monsterG2LabelColour = "red";  
-			monsterG3LabelColour = "green";
+			RFLabelColour = "yellow"; // Customize Label colour  //white, yellow, red, green, blue, blueviolet, orange, black, fuchsia, gold, deeppink. Choose from these colors.
+			monsterG2LabelColour = "yellow";  
+			monsterG3LabelColour = "yellow";
 			monsterG4LabelColour = "blueviolet";
-			affixLabel_1Colour = "yellow"; // // Customize the Label colour of EliteAffix //red, green, blue, blueviolet, yellow, orange, black, fuchsia, gold, deeppink. Choose from these colors.
-			affixLabel_2Colour = "yellow";
-			affixLabel_3Colour = "yellow";
+			affixLabel_1Colour = "white"; // // Customize the Label colour of EliteAffix //white, yellow, red, green, blue, blueviolet, orange, black, fuchsia, gold, deeppink. Choose from these colors.
+			affixLabel_2Colour = "white";
+			affixLabel_3Colour = "white";
 			// Label Size
 			groundLabelsizeG1 = 12.0f; // Customize groundLabelsize
 			groundLabelsizeG2 = 12.0f;
@@ -308,6 +308,10 @@ namespace Turbo.Plugins.Stone
 			else if (monsterGroupColour == "deeppink")
 				{				
 					groundfontsize = groundLabelsize; mapfontsize = mapLabelsize; a = 255; r = 255; g = 20; b = 147; return;
+				}
+			else if (monsterGroupColour == "white")
+				{				
+					groundfontsize = groundLabelsize; mapfontsize = mapLabelsize; a = 255; r = 255; g = 255; b = 255; return;
 				}
 		}
     }
