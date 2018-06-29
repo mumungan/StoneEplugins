@@ -62,16 +62,27 @@ namespace Turbo.Plugins.Stone
 
         public void PaintWorld(WorldLayer layer)
         {
+			foreach (var marker in Hud.Game.Markers)
+			{
+			if (showDirectionLine && marker.SnoActor != null)
+				{
+				if (marker.SnoActor.Code.Contains("Boss"))
+					{
+						BossDirectionLineDecorator.ToggleDecorators<GroundLabelDecorator>(!marker.FloorCoordinate.IsOnScreen()); // do not display ground labels when the marker is on the screen
+						BossDirectionLineDecorator.Paint(layer, null, marker.FloorCoordinate, marker.Name);
+					}
+				}
+			}
             var monsters = Hud.Game.AliveMonsters;
             foreach (var monster in monsters)
                 if (monster.Rarity == ActorRarity.Boss)
                 {
-                    if (showDirectionLine)
+                    if (showDirectionLine && monster.IsOnScreen)
                     {
                         BossDirectionLineDecorator.ToggleDecorators<GroundLabelDecorator>(!monster.FloorCoordinate.IsOnScreen()); // do not display ground labels when the marker is on the screen
                         BossDirectionLineDecorator.Paint(layer, null, monster.FloorCoordinate, null);
                     }
-                    if (showCCoffMessage && !monster.Frozen && !monster.Chilled && !monster.Slow && !monster.Stunned && !monster.Blind)
+                    if ((showCCoffMessage) && (!monster.Frozen && !monster.Chilled && !monster.Slow && !monster.Stunned && !monster.Blind))
                     {
                         var CCofftime = (Hud.Game.CurrentGameTick - CCoffStarttick) / 60.0d;
                         String CCofftimetext = "CC off " + Math.Truncate(CCofftime) + "s";
@@ -83,11 +94,13 @@ namespace Turbo.Plugins.Stone
                         BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, CCofftimetext);
                     }
 
-                    if (showCCoffMessage && monster.Frozen || monster.Chilled || monster.Slow || monster.Stunned || monster.Blind)
+                    if ( (showCCoffMessage) && (monster.Frozen || monster.Chilled || monster.Slow || monster.Stunned || monster.Blind))
+					{
                         if (CCofftimerRunning)
                         {
                             CCofftimerRunning = false;
                         }
+					}
                     if (monster.Frozen && showCC)
                     { BossCCDecorator.Paint(layer, monster, monster.FloorCoordinate, "Frozen"); }
                     if (monster.Chilled && showCC)
