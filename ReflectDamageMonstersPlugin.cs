@@ -74,21 +74,21 @@ namespace Turbo.Plugins.Stone
 			
 			// Monster Group 1 that wants to label. monsterG1Label uses ReflectDamageMonsters'  label
 			monsterG1_1 = ""; // Insert the Name of the monster. you can use English or your default game language
-			monsterG1_2 = "";  // monsterGroup 1 Label colour
+			monsterG1_2 = "";  
 			monsterG1_3 = "";      
 			monsterG1_4 = "";
             // Monster Group 2 that wants to label. 
-			monsterG2_1 = "Retching Cadaver";  // monsterGroup 2 Label colour
+			monsterG2_1 = "Retching Cadaver";  // monsterGroup 2 Label Monsters
 			monsterG2_2 = "Deathspitter";
 			monsterG2_3 = "Spewing Horror";
 			monsterG2_4 = "Dust Retcher";
 			// Monster Group 3 that wants to label. 
-			monsterG3_1 = "Tomb Guardian";  // monsterGroup 3 Label colour
+			monsterG3_1 = "Tomb Guardian";  // monsterGroup 3 Label Monsters
 			monsterG3_2 = "Vengeful Summoner";
 			monsterG3_3 = "Returned Summoner";
 			monsterG3_4 = "Tortured Summoner";
 			// Monster Group 4 that wants to label. 
-			monsterG4_1 = "";  // monsterGroup 4 Label colour
+			monsterG4_1 = "";  // monsterGroup 4 Label Monsters
 			monsterG4_2 = "";
 			monsterG4_3 = "";
 			monsterG4_4 = "";

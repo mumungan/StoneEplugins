@@ -55,23 +55,23 @@ namespace Turbo.Plugins.Stone
 			plugin.mapLabelsizeaffix2 = 8.0f;
 			plugin.mapLabelsizeaffix3 = 8.0f;
 			
-			// Monster Group 1 that wants to label. monsterG1Label uses ReflectDamageMonsters'  label
-            plugin.monsterG1_1 = ""; // Insert the Name of the monster. you can use English or your default game language
-            plugin.monsterG1_2 = "";  // monsterGroup 1 Label colour
+			// Monster Group 1  // Insert the Name of the monster. you can use English or your default game language
+            plugin.monsterG1_1 = "";
+            plugin.monsterG1_2 = "";  
             plugin.monsterG1_3 = "";      
             plugin.monsterG1_4 = "";
-            // Monster Group 2 that wants to label. 
-            plugin.monsterG2_1 = "Retching Cadaver";  // monsterGroup 2 Label colour
+            // Monster Group 2 
+            plugin.monsterG2_1 = "Retching Cadaver";  // monsterGroup 2 Label Monsters
             plugin.monsterG2_2 = "Deathspitter";
             plugin.monsterG2_3 = "Spewing Horror";
             plugin.monsterG2_4 = "Dust Retcher";
-			// Monster Group 3 that wants to label. 
-            plugin.monsterG3_1 = "Tomb Guardian";  // monsterGroup 3 Label colour
+			// Monster Group 3
+            plugin.monsterG3_1 = "Tomb Guardian";  // monsterGroup 3 Label Monsters
             plugin.monsterG3_2 = "Vengeful Summoner";
             plugin.monsterG3_3 = "Returned Summoner";
             plugin.monsterG3_4 = "Tortured Summoner";
-			// Monster Group 4 that wants to label. 
-            plugin.monsterG4_1 = "";  // monsterGroup 4 Label colour
+			// Monster Group 4 
+            plugin.monsterG4_1 = "";  // monsterGroup 4 Label Monsters
             plugin.monsterG4_2 = "";
             plugin.monsterG4_3 = "";
             plugin.monsterG4_4 = "";
