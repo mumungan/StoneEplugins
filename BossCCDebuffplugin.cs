@@ -91,8 +91,8 @@ namespace Turbo.Plugins.Stone
 					}
 					if (showDirectionLine && showGroundLine)
 					{
-						IScreenCoordinate boss = Hud.Window.CreateScreenCoordinate(monster.ScreenCoordinate.X, monster.ScreenCoordinate.Y);
-						Hud.Render.CreateBrush(192, 255, 255, 55, -1).DrawLine(boss.X, boss.Y + 60, Hud.Game.Me.ScreenCoordinate.X, Hud.Game.Me.ScreenCoordinate.Y + 60, 1.0f);
+						IScreenCoordinate boss = Hud.Window.CreateScreenCoordinate(monster.FloorCoordinate.ToScreenCoordinate().X, monster.FloorCoordinate.ToScreenCoordinate().Y);
+						Hud.Render.CreateBrush(192, 255, 255, 55, -1).DrawLine(boss.X, boss.Y, Hud.Game.Me.ScreenCoordinate.X, Hud.Game.Me.ScreenCoordinate.Y + 60, 1.0f);
                     }
                     if ((showCCoffMessage) && (!monster.Frozen && !monster.Chilled && !monster.Slow && !monster.Stunned && !monster.Blind))
                     {
