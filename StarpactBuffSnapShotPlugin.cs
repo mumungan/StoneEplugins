@@ -37,6 +37,7 @@ namespace Turbo.Plugins.Stone
         {
             var actors = Hud.Game.Actors;
             var me = Hud.Game.Me;
+			if (Hud.Game.Me.HeroClassDefinition.HeroClass != HeroClass.Wizard) return;
             sbremaining = 1.25f - ((Hud.Game.CurrentGameTick - sbstarpactstarttict) / 60.0f);
 			if (sbstarpacttimerRunning == true && sbremaining <= 0) sbstarpacttimerRunning = false;
             if (sbremaining < 0) sbremaining = 0;  	
