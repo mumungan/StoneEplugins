@@ -66,6 +66,7 @@ namespace Turbo.Plugins.Stone
             var actors = Hud.Game.Actors;
             var me = Hud.Game.Me;
             remaining = 1.25f - ((Hud.Game.CurrentGameTick - starpactstarttict) / 60.0f);
+			if (starpacttimerRunning == true && remaining <= 0) starpacttimerRunning = false;
             if (remaining < 0) remaining = 0;
             foreach (var actor in actors)
             {
@@ -92,6 +93,10 @@ namespace Turbo.Plugins.Stone
                                 }
                                 if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining >= 0.1)
                                 {
+								    if (starpacttimerRunning)
+                                    {
+                                        starpacttimerRunning = false;
+                                    }
                                     meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
                                     break;
                                 }
