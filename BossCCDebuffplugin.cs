@@ -82,7 +82,7 @@ namespace Turbo.Plugins.Stone
 			}
             var monsters = Hud.Game.AliveMonsters;
             foreach (var monster in monsters)
-                if (monster.Rarity == ActorRarity.Boss)
+                if (monster.Rarity == ActorRarity.Boss && monster.SummonerAcdDynamicId == 0)
                 {
                     if (showDirectionLine && showMiniMapLine)
                     {
