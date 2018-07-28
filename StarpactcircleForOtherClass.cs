@@ -10,6 +10,7 @@ namespace Turbo.Plugins.Stone
         public WorldDecoratorCollection meteorstringDeco { get; set; }
         public WorldDecoratorCollection meteorvisionstringDeco { get; set; }
         public WorldDecoratorCollection meteortimerDecorator { get; set; }
+		public bool timeron { get; set; }
         public float remaining { get; set; }
         public float starpactstarttict { get; set; }
         private bool starpacttimerRunning = false;
@@ -23,6 +24,7 @@ namespace Turbo.Plugins.Stone
         {
             base.Load(hud);
 
+			timeron = true;
             meteorcircleDeco = new WorldDecoratorCollection(
                 new GroundCircleDecorator(Hud)
                 {
@@ -87,6 +89,7 @@ namespace Turbo.Plugins.Stone
                                         starpacttimerRunning = true;
                                     }
                                     meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
+									if (timeron) meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate.Offset(0, 0, -3), null);
                                     break;
                                 }
                                 if (player.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining >= 0.1)
@@ -96,10 +99,12 @@ namespace Turbo.Plugins.Stone
                                         starpacttimerRunning = false;
                                     }
                                     meteorstringDeco.Paint(layer, actor, actor.FloorCoordinate, Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized);
+									if (timeron) meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate.Offset(0, 0, -3), null);
                                     break;
                                 }
                                 if (player.HeroClassDefinition.HeroClass == HeroClass.Wizard && remaining < 0.1 && remaining > 0)
                                 {
+									if (timeron) meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate.Offset(0, 0, -3), null);
                                     if (starpacttimerRunning)
                                     {
                                         starpacttimerRunning = false;
