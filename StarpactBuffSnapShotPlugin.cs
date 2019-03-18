@@ -119,7 +119,7 @@ namespace Turbo.Plugins.Stone
             {
                     switch (actor.SnoActor.Sno)
                     {
-                        case 217142:
+                        case (ActorSnoEnum)217142:
                             if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard)
                             {
                                 if (Hud.Game.Me.HeroClassDefinition.HeroClass == HeroClass.Wizard && me.Stats.ResourceCurArcane < 5)
@@ -154,7 +154,7 @@ namespace Turbo.Plugins.Stone
                                     }
 	                                if ( sbremaining < 0.1 && sbremaining > 0)
 									{
-										if (me.Powers.BuffIsActive(430674, 1)) coe = "V";
+										if (me.Powers.BuffIsActive(430674, 1)) coe = "A";
 										else if (me.Powers.BuffIsActive(430674, 2)) coe = "C";
 										else if (me.Powers.BuffIsActive(430674, 3)) coe = "F";
 										else if (me.Powers.BuffIsActive(430674, 5)) coe = "L";

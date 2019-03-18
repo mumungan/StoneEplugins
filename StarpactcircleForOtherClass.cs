@@ -77,7 +77,7 @@ namespace Turbo.Plugins.Stone
 				{
                     switch (actor.SnoActor.Sno)
                     {
-                        case 217142:
+                        case (ActorSnoEnum)217142:
                             meteorcircleDeco.Paint(layer, actor, actor.FloorCoordinate, null);
                             if (player.HeroClassDefinition.HeroClass == HeroClass.Wizard)
                             {
@@ -111,7 +111,7 @@ namespace Turbo.Plugins.Stone
                                     }
                                     if (player.Powers.BuffIsActive(430674, 1) && player.Powers.BuffIsActive(134456))
                                     {
-                                        meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
+                                        meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "Arc" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_ArcaneTorrent.NameLocalized);
                                         break;
                                     }
                                     if (player.Powers.BuffIsActive(134456))
@@ -121,7 +121,7 @@ namespace Turbo.Plugins.Stone
                                     }
                                     if (player.Powers.BuffIsActive(430674, 1) && player.Powers.BuffIsActive(91549))
                                     {
-                                        meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "VIS" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
+                                        meteorvisionstringDeco.Paint(layer, actor, actor.FloorCoordinate, "Arc" + Hud.Sno.SnoPowers.Wizard_Meteor.NameLocalized + " + " + Hud.Sno.SnoPowers.Wizard_Disintegrate.NameLocalized);
                                         break;
                                     }
                                     if (player.Powers.BuffIsActive(91549))

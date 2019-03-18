@@ -74,8 +74,8 @@ namespace Turbo.Plugins.Stone
             {
                     switch (actor.SnoActor.Sno)
                     {
-                        case 217142:
-                            meteorcircleDeco.Paint(layer, actor, actor.FloorCoordinate, null);
+                    case (ActorSnoEnum)217142:
+                        meteorcircleDeco.Paint(layer, actor, actor.FloorCoordinate, null);
                             if (Hud.Game.Me.HeroClassDefinition.HeroClass != HeroClass.Wizard)
                             {
                                 meteortimerDecorator.Paint(layer, actor, actor.FloorCoordinate, null);
