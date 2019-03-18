@@ -128,7 +128,7 @@ namespace Turbo.Plugins.Stone
                     var portraitRect = player.PortraitUiElement.Rectangle;
 
                     var x = portraitRect.Right * 8.2f;
-                    var y = portraitRect.Top + portraitRect.Height * 2.0f;
+                    var y = portraitRect.Top + portraitRect.Height * 1.75f;
 
                     BuffPainter.PaintHorizontal(_ruleCalculator.PaintInfoList, x, y, _ruleCalculator.StandardIconSize, 0);
                 }
